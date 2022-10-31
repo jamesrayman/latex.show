@@ -50,13 +50,13 @@ def render(query):
     query = decode(query)
 
     with open(data_dir/'pic.asy', 'w') as f:
-        f.write(f'settings.outformat = "svg"; label("${query}$");')
+        f.write(f'settings.outformat = "png"; label("${query}$");')
 
     subprocess.run(['asy', 'pic.asy'], cwd=data_dir)
 
-    with open(data_dir/'pic.svg', 'rb') as f:
+    with open(data_dir/'pic.png', 'rb') as f:
         svg = f.read()
 
     shutil.rmtree(data_dir)
 
-    return Response(svg, mimetype='image/svg+xml')
+    return Response(svg, mimetype='image/png')
